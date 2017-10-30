@@ -1,11 +1,34 @@
 <% include partials/header %>
 
-<h1>Yemekler</h1>
-<% yemekler.forEach(function(yemek){ %>
-    <div class="yemek">
-        <span class="adi"><%= yemek.adi %></span><br />
-        <img src="<%= yemek.resim %>" alt="">
-    </div>
-<% }) %>
+
+
+<div class="container">
+	<header class="jumbotron">
+		<div class="container">
+			<h1>Hoşgeldiniz</h1>
+			<p>En Leziz yemeklerini bulabileceginiz ve herkesle paylasabileceginiz bir sayfa</p>
+			<p>
+				<a class="btn btn-primary btn-large" href="/yemekler/yeni">Yeni Yemek Ekle</a>
+			</p>
+		</div>
+		
+		
+	</header>
+
+<div class="row">
+	<% yemekler.forEach(function(yemek){ %>
+		<div class="col-md-3 col-sm-6">
+			<div class="thumbnail"> 
+				<img src="<%= yemek.resim %>">
+				<div class="caption text-center">
+					<h3><%= yemek.adi %></h3>
+				</div>
+			</div>
+		</div>
+	<%	}); %>
+</div>
+
+
 
 <% include partials/footer %>
+</div>
