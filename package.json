@@ -1,0 +1,15 @@
+{
+  "name": "yemeksitesi",
+  "version": "1.0.0",
+  "description": "Nodejs ile ilk kücük proje denemem",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "reyiz",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^2.5.7",
+    "express": "^4.16.2"
+  }
+}

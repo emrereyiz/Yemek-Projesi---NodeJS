@@ -1,0 +1,11 @@
+<% include partials/header %>
+
+<h1>Yemekler</h1>
+<% yemekler.forEach(function(yemek){ %>
+    <div class="yemek">
+        <span class="adi"><%= yemek.adi %></span><br />
+        <img src="<%= yemek.resim %>" alt="">
+    </div>
+<% }) %>
+
+<% include partials/footer %>
