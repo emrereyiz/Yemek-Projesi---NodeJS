@@ -5,7 +5,6 @@
 <div class="container">
 	<header class="jumbotron">
 		<div class="container">
-			<h1>Hoşgeldiniz</h1>
 			<p>En Leziz yemeklerini bulabileceginiz ve herkesle paylasabileceginiz bir sayfa</p>
 			<p>
 				<a class="btn btn-primary btn-large" href="/yemekler/yeni">Yeni Yemek Ekle</a>
@@ -22,6 +21,9 @@
 				<img src="<%= yemek.resim %>">
 				<div class="caption text-center">
 					<h3><%= yemek.adi %></h3>
+					<p>
+						<a href="/yemekler/<%= yemek._id %>" class="btn btn-primary">Detay</a>
+					</p>
 				</div>
 			</div>
 		</div>

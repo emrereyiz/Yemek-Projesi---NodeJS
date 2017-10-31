@@ -1,0 +1,30 @@
+<% include partials/header %>
+
+
+
+<div class="container">
+	<header class="jumbotron">
+		<div class="container">
+			<p><%= yemek.adi %></p>
+			<p>
+				<a class="btn btn-primary btn-large" href="/yemekler/yeni">Yeni Yemek Ekle</a>
+                <a class="btn btn-danger btn-large" href="/yemekler/">Geri dön</a>
+			</p>
+		</div>
+		
+		
+	</header>
+
+<div class="row">
+        <div class="thumbnail"> 
+            <div class="caption text-center">
+                <h3><%= yemek.adi %></h3>
+                <img src="<%= yemek.resim %>">
+            </div>
+        </div>
+</div>
+
+
+
+<% include partials/footer %>
+</div>

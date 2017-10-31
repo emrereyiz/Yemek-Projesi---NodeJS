@@ -1,35 +1,66 @@
-var express = require("express");
-var app = express();
-var bodyParser = require("body-parser");
+var express     = require("express"),
+    app         = express(),
+    bodyParser  = require("body-parser"),
+    mongoose = require("mongoose");
 
+mongoose.connect("mongodb://localhost/yemekSitesi");
 app.use(bodyParser.urlencoded({extended:true}));
 app.set("view engine", "ejs");
 
-var yemekler = [
-    {adi: 'hamburger', resim: "https://www.burgerking.com.tr/cmsfiles/products/chili-cheese-whopper-menu.png?v=115"},
-    {adi: 'hamburger 2', resim: "https://themenustar.com/upload/2016-08-18/557b693fd327b4.jpg"},
-    {adi: 'hamburger 3', resim: "https://www.burgerking.com.tr/cmsfiles/products/tavuklu-barbeku-brioche-menu-1.png?v=115"},
-];
+var yemekSchema = new mongoose.Schema({
+    adi     : String,
+    resim   : String,
+    aciklama: String
+});
+
+var Yemek = mongoose.model("Yemek", yemekSchema);
 
 app.get("/", function(req, res){
     res.render("home");
 });
 
 app.get("/yemekler", function(req, res){
-    res.render("yemekler", {yemekler: yemekler})
+    // yemekleri db'den alalim
+    Yemek.find({}, function(error, yemeklerDB){
+        if(error){
+            console.log(error)
+        }else{
+            console.log("*********YEMEKLER*********");
+            console.log(yemeklerDB);
+            res.render("yemekler", {yemekler: yemeklerDB});
+        };
+    });
 });
 
 app.post("/yemekler", function(req, res){
-    // res.send("test");
     var adi = req.body.adi;
     var resim = req.body.resim;
-    var yeniYemek = {adi:adi, resim:resim};
-    yemekler.push(yeniYemek);
+    var aciklama = req.body.aciklama;
+    var yeniYemek = {adi:adi, resim:resim, aciklama: aciklama};
+    
+    Yemek.create(yeniYemek, function(error, olusturulmusYemek){
+        if(error){
+            console.log(error)
+        }else{
+            //res.redirect("/yemekler")
+        };
+    });
+
     res.redirect("/yemekler");
 });
 
 app.get("/yemekler/yeni", function(req, res){
     res.render("yeni");
+});
+
+app.get("/yemekler/:id", function(req, res){
+    Yemek.findById(req.params.id, function(error, bulunanYemek){
+        if(error){
+            console.log(error);
+        }else{
+            res.render("goster", {yemek: bulunanYemek});
+        }
+    });
 });
 
 var server = app.listen(3000, function(){
